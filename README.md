@@ -1,6 +1,6 @@
-# CI/CD
-### <strong>Precily DevOps Task</strong>
+# CI/CD 
 
+## Docker
 Step 1: Clone the repo
 ```bash 
 git clone git@github.com:ashishworkspace/tess.git 
@@ -28,3 +28,29 @@ curl --location --request POST 'http://localhost:5000/read_ocr' \
     "config": "--psm 10 --oem 3 -c tessedit_char_whitelist=0123456789"
 }'
 ```
+
+<br />
+<br />
+
+## Kubernetes
+
+Step 1: Run the Kube Manifest file  ( Make sure that minikube is up )
+
+```bash
+kubectl apply -f k8s/
+```
+Step 2: Now check the svc => will return NodePort 
+```bash
+kubectl get svc -n precily
+```
+Step 3: Get the minikube ip 
+```bash
+minikube ip  
+```
+Step 4: Now run the app
+```bash
+http://<minikube-ip>:<node-port>
+```
+Note:
+> Image at docker-hub  <br />
+> name: `ashishizofficial/flask_ocr:tess`
