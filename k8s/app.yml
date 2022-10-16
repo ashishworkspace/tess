@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: precily
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: precily
+  name: api-flask
+spec:
+  selector:
+    matchLabels:
+      app: api-flask
+  template:
+    metadata:
+      labels:
+        app: api-flask
+    spec:
+      containers:
+        - name: api-flask
+          image: ashishizofficial/flask_ocr:tess
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 4000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: precily
+  name: api-flask
+spec:
+  selector:
+    app: api-flask
+  ports:
+    - port: 4000
+      targetPort: 4000
+  type: NodePort
