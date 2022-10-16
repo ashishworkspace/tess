@@ -61,9 +61,9 @@ Note:
 
 ## Github action 
 
-Workflow has 2 mainly steps.<br />
-1st step will build the docker image and push the docker images to docker hub public reg.<br />
-2nd step will deploy the kubernetes manifest file will latest image tag.<br />
+Workflow has mainly 2 steps.<br />
+1st step will build the docker image and push the docker image to docker hub public reg.<br />
+2nd step will deploy the kubernetes manifest file will latest image & tag.<br />
 
 ### Script present at server => `script.sh`
 ```bash
@@ -75,7 +75,7 @@ export TAG=$(git rev-list HEAD --max-count=1)
 
 #Kubernetes manifest
 sed  's@ashishizofficial/flask_ocr:tess@'"ashishizofficial/api-flask:tess-$TAG"'@' k8s/app.yml > /home/ec2-user/deploy.yml
-kubectl apply -f /home/ec2-user/deploy.ym
+kubectl apply -f /home/ec2-user/deploy.yml
 ```
 
 
